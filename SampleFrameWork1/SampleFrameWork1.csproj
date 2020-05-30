@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseSampleApplicationPage.cs" />
+    <Compile Include="Gender.cs" />
     <Compile Include="SampleApplicationOneTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleApplicationPage.cs" />
