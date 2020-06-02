@@ -1,3 +1,4 @@
+using AutomationResrce;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -18,27 +19,27 @@ namespace SampleApp2
         [TestMethod]
         [Description("Validating search functionality using a keyword")]
         [TestProperty("Author","Vinod")]
-        public void TestMethod1()
+        public void TCID1()
         {
             TheTestUser = new TestUser();
             TheTestUser.SearchKeyword = "Blouse";
-            Driver = GetChromeDriver();
+            string stringToSearch = "Blouse";
+            var factory = new WebDriverFactory();
+            Driver = factory.Create(BrowserType.Chrome);
+            //Driver = GetChromeDriver();
             myStorePg = new MyStoreAppPage(Driver);
             myStorePg.GoTo();
-            var SearchPgObj=myStorePg.SearchFunctionalityValidation(TheTestUser);            
-            Assert.IsTrue(SearchPgObj.IsVisible, "No Search results with the keyword");
+            SearchPg SearchPgObj=myStorePg.SearchFunctionalityValidation(stringToSearch);
+            //Assert.IsTrue(SearchPgObj.IsVisible, "No Search results with the keyword");
+            Assert.IsTrue(SearchPgObj.Contains(Item.Blouse),
+                $"When searching for the string=>{stringToSearch},"+
+                $"we did not find it in the search results.");
         }
 
         [TestCleanup]
         public void CleanUpAfterEveryTestMethod()
         {
             Driver.Quit();
-        }
-
-        private IWebDriver GetChromeDriver()
-        {
-            var outputDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            return new ChromeDriver(outputDirectory);
-        }
+        }        
     }
 }

@@ -33,9 +33,9 @@ namespace SampleApp2
                  $"Actual:{Driver.Title}");
         }
 
-        internal SearchPg SearchFunctionalityValidation(TestUser user)
+        internal SearchPg SearchFunctionalityValidation(string searchKeyword)
         {
-            SearchField.SendKeys(user.SearchKeyword);
+            SearchField.SendKeys(searchKeyword);
             SearchBtn.Click();
             return new SearchPg(Driver);
         }

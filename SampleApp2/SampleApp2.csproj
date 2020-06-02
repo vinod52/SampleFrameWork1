@@ -15,6 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AutomationResrce\AutomationResrce.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="chromedriver.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
