@@ -17,7 +17,7 @@ namespace SampleApp2
             {
                 try
                 {
-                    return Driver.FindElement(By.Id("center_column")).Displayed;
+                    return CenterColumn.Displayed;
                 }
                 catch (NoSuchElementException)
                 {
@@ -25,7 +25,7 @@ namespace SampleApp2
                 }
             }
         }
-
+        private IWebElement CenterColumn => Driver.FindElement(By.Id("center_column"));
         internal void GoTo()
         {
             Driver.Navigate().GoToUrl("http://automationpractice.com/index.php?controller=contact");                

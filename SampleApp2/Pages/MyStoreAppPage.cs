@@ -4,9 +4,10 @@ using System;
 
 namespace SampleApp2
 {
-    internal class MyStoreAppPage
-    { 
-        protected IWebDriver Driver { get; set; }
+    internal class MyStoreAppPage :BaseSampleApplicationPage
+    {         
+        public Slider Slider { get; private set; }
+
         public string PageTitle => "My Store";
         public IWebElement SearchBtn => Driver.FindElement(By.CssSelector("#searchbox>button"));
         public IWebElement SearchField => Driver.FindElement(By.Id("search_query_top"));
@@ -17,13 +18,13 @@ namespace SampleApp2
                 return Driver.Title.Contains(PageTitle);
             }
             internal set { }
-        }        
+        }       
 
-        public MyStoreAppPage(IWebDriver driver)
-        {
-            Driver = driver;
+        public MyStoreAppPage(IWebDriver driver) :base(driver)
+        {            
+            Slider = new Slider(Driver);
         }        
-
+        
         internal void GoTo()
         {
             Driver.Navigate().GoToUrl("http://automationpractice.com/index.php");

@@ -9,10 +9,9 @@ using System.Reflection;
 namespace SampleApp2
 {
     [TestClass]
-    [TestCategory("SearchFunctionality")]
-    public class SearchFunctionality
-    {
-        public IWebDriver Driver { get; set; }
+    [TestCategory("SearchFunctionality"), TestCategory("SampleApp2")]
+    public class SearchFunctionality : BaseTest
+    {        
         internal MyStoreAppPage myStorePg { get; private set; }
         internal TestUser TheTestUser { get; private set; }
 
@@ -23,9 +22,7 @@ namespace SampleApp2
         {
             TheTestUser = new TestUser();
             TheTestUser.SearchKeyword = "Blouse";
-            string stringToSearch = "Blouse";
-            var factory = new WebDriverFactory();
-            Driver = factory.Create(BrowserType.Chrome);
+            string stringToSearch = "Blouse";         
             //Driver = GetChromeDriver();
             myStorePg = new MyStoreAppPage(Driver);
             myStorePg.GoTo();
@@ -34,12 +31,6 @@ namespace SampleApp2
             Assert.IsTrue(SearchPgObj.Contains(Item.Blouse),
                 $"When searching for the string=>{stringToSearch},"+
                 $"we did not find it in the search results.");
-        }
-
-        [TestCleanup]
-        public void CleanUpAfterEveryTestMethod()
-        {
-            Driver.Quit();
-        }        
+        }      
     }
 }

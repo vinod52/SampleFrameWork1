@@ -8,11 +8,9 @@ using System.Text;
 namespace SampleApp2
 {
     [TestClass]
-    [TestCategory("ContactUsFunctionality")]
-    public class ContactUsFunctionality
-    {
-        public IWebDriver Driver { get; private set; }
-
+    [TestCategory("ContactUsFunctionality"), TestCategory("SampleApp2")]
+    public class ContactUsFunctionality : BaseTest
+    {        
         [TestMethod]
         [Description("Validating Contact Us page display with form")]
         [TestProperty("Author", "Vinod")]
@@ -22,19 +20,6 @@ namespace SampleApp2
             contactUsPg.GoTo();
             Assert.IsTrue(contactUsPg.IsLoaded,
                "The Contact us page did not load successfully");
-        }
-
-        [TestInitialize]
-        public void SetUpForEverySingleTestMethod()
-        {
-            var factory = new WebDriverFactory();
-            Driver = factory.Create(BrowserType.Chrome);
-        }
-
-        [TestCleanup]
-        public void CleanUpAfterEveryTestMethod()
-        {
-            Driver.Quit();
-        }
+        }      
     }
 }
