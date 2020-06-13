@@ -1,11 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NLog;
 using OpenQA.Selenium;
 using System;
 
 namespace SampleApp2
 {
     internal class MyStoreAppPage :BaseSampleApplicationPage
-    {         
+    {
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
         public Slider Slider { get; private set; }
 
         public string PageTitle => "My Store";
@@ -27,17 +29,20 @@ namespace SampleApp2
         
         internal void GoTo()
         {
-            Driver.Navigate().GoToUrl("http://automationpractice.com/index.php");
+            var URL = "http://automationpractice.com/index.php";
+            Driver.Navigate().GoToUrl(URL);
             Driver.Manage().Window.Maximize();
             Assert.IsTrue(IsVisble,
                 $"My Store application page is not visible =>{PageTitle}"+
                  $"Actual:{Driver.Title}");
+            _logger.Info($"Opened URL =>{URL}");
         }
 
         internal SearchPg SearchFunctionalityValidation(string searchKeyword)
         {
             SearchField.SendKeys(searchKeyword);
             SearchBtn.Click();
+            _logger.Info($"Searched for an item in the search bar=>{searchKeyword}");
             return new SearchPg(Driver);
         }
     }

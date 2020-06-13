@@ -1,12 +1,14 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Internal;
 using System;
 using System.Collections;
+using AventStack.ExtentReports;
+using NLog;
 
 namespace SampleApp2
 {
     internal class SearchPg
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         protected IWebDriver Driver { get; set; }
         public bool IsVisible { 
             get
@@ -30,12 +32,18 @@ namespace SampleApp2
 
         internal bool Contains(Item itemToCheckFor)
         {
-            switch(itemToCheckFor)
+
+            Reporter.LogTestStepForBugLogger(Status.Info,
+                $"Validate that item=>{itemToCheckFor} exists.");
+
+            switch (itemToCheckFor)
             {
                 case Item.Blouse:
-                    return Driver.FindElement(By.XPath("//*[@title='Blouse']")).Displayed;                    
+                    var isBlouseDisplayed = Driver.FindElement(By.XPath("//*[@title='Blouse']")).Displayed;
+                    Logger.Trace("Element found by XPath=>*[@title=\'Blouse\'] isDisplayed=>" + isBlouseDisplayed);
+                    return isBlouseDisplayed;
                 default:
-                    throw new ArgumentOutOfRangeException("No such item exists in this collection");                    
+                    throw new ArgumentOutOfRangeException("No such item exists in this collection");
             }
         }
 
