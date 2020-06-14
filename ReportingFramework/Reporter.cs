@@ -45,7 +45,7 @@ namespace ReportingFramework
         public static void AddTestCaseMetadataToHtmlReport(TestContext testContext)
         {
             MyTestContext = testContext;
-            CurrentTestCase = ReportManager.CreateTest(MyTestContext.TestName);
+            CurrentTestCase = ReportManager.CreateTest(MyTestContext.TestName);            
         }
 
         public static void LogPassingTestStepToBugLogger(string message)
