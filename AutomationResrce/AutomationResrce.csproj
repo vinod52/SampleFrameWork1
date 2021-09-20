@@ -19,7 +19,7 @@
     <PackageReference Include="NLog" Version="4.7.2" />
     <PackageReference Include="NLog.Config" Version="4.7.2" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="SharpCompress" Version="0.25.1" />
+    <PackageReference Include="SharpCompress" Version="0.29.0" />
   </ItemGroup>
 
   <ItemGroup>
